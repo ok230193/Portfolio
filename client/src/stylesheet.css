@@ -1,0 +1,476 @@
+/* ========== Base ========== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Avenir Next";
+  min-width: 0;
+}
+ul { list-style: none; }
+
+h1 {
+  font-family: "Avenir Next";
+  font-size: 120px;
+  font-weight: 700;
+  color: #135f57;
+}
+h2 {
+  font-family: "Avenir Next";
+  color: #08a518;
+  font-size: 90px;
+  margin-top: 0;
+  font-weight: 400;
+}
+h3 {
+  font-family: "Avenir Next";
+  color: #e45108;
+  font-size: 70px;
+  border-bottom: 4px solid #2e79d6;
+  line-height: 100px;
+  margin-bottom: 40px;
+}
+
+/* ========== Header ========== */
+.header {
+  height: 200px;
+  border-bottom: 4px solid #ffffff9c;
+  background-color: #ffffff;
+}
+.header-logo {
+  height: 100px;
+  width: 100px;
+  background-color: #3883ce;
+  float: left;
+  text-align: center;
+}
+.header-logo img {
+  width: 200px;
+  padding-top: 0;
+}
+
+/* ========== Layout ========== */
+.main-wrapper { background-color: #aee1e1; }
+.main {
+  width: 95vw;
+  max-width: 2500px;
+  margin: 0 auto;
+  padding: 96px 0;
+}
+
+/* ========== Product grid (Main) ========== */
+.lesson-container {
+  margin-top: 96px;
+  display: grid;
+  gap: 48px 32px;
+  grid-template-columns: repeat(2, minmax(320px, 1fr));
+  position: relative;
+}
+.lesson-container > h3 {
+  grid-column: 1 / -1;
+  margin-bottom: 40px;
+  justify-self: start;
+}
+
+.list-header {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  z-index: 2;
+}
+.cart-link-btn {
+  display: inline-block;
+  font-size: 40px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #106be0;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ========== Product card ========== */
+.lesson-card {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  box-shadow: 0 0 6px #4071cd;
+  background-color: #fff;
+  border-radius: 6px;
+  position: relative;
+  transition: transform 0.2s ease-in-out, box-shadow .2s;
+  z-index: 1;
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.lesson-item{
+  /* 既存  padding: 48px 0 64px; から置き換え */
+  padding: 48px 40px 64px;       /* ← 左右に 40px の余白 */
+}
+
+.lesson-item img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+  margin-top: 16px;
+}
+
+.lesson-item p {
+  font-family: "Avenir Next";
+  color: #080808;
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.lesson-item h4,
+.lesson-title {
+  font-size: 50px;
+  font-weight: 1000;
+  margin-bottom: 16px;
+  color: #330c8f;
+}
+
+.lesson-item .intro{
+  padding: 0 24px;
+  margin: 16px auto 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* ← ここがポイント：自由に折り返す */
+  overflow-wrap: anywhere;     /* 新しめの推奨 */
+  word-break: break-word;      /* 互換用の保険 */
+  white-space: normal;         /* 念のため */
+  line-height: 1.6;
+  text-align: center;          /* 左寄せにしたい場合は 'left' に */
+}
+
+/* 価格・在庫・ボタン（新しい方を残す） */
+.price { font-size: 22px; font-weight: 700; color:#0a8f5b; margin: 8px 0; }
+.stock { font-size: 18px; font-weight: 600; color:#330c8f; margin: 8px 0 12px; }
+.add-btn {
+  padding: 10px 20px;
+  margin-top: 40px;
+  border: 0;
+  font-size: 50px;
+  border-radius: 30px;
+  font-weight: 700;
+  background: #0a8f5b;
+  color: #fff;
+  cursor: pointer;
+}
+.add-btn[disabled] { opacity:.6; cursor:not-allowed; }
+.notice.ok { color:#0a8f5b; font-weight:700; margin-top:8px; }
+
+
+.image-wrap{
+  position: relative;
+  width: min(700px, 100%);
+  aspect-ratio: 1 / 1;      /* 正方形の枠を作る */
+  margin: 16px auto;
+  overflow: hidden;         /* 枠からはみ出す部分は隠す */
+}
+
+.image-wrap img{
+  position: absolute; inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;        /* 中央でトリミングして均一表示 */
+  display: block;
+}
+
+.soldout-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+}
+.soldout-overlay span {
+  color: #fff; font-size: 100px; font-weight: 800; letter-spacing: .2em;
+  text-shadow: 0 0 6px rgba(0,0,0,.6);
+}
+.soldout-ribbon {
+  position: absolute; top: 18px; left: -40px; transform: rotate(-45deg);
+  background: #e60033; color: #fff; padding: 8px 60px;
+  font-size: 50px; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  z-index: 6;
+}
+
+/* 追加完了/エラー 通知（重複を一本化） */
+.notice {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0;
+  animation: notice-fade 2s ease forwards;
+}
+.notice.err { color: #d93025; }
+@keyframes notice-fade {
+  0%   { opacity: 0; transform: translateY(6px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+/* ========== Modal (共通) ========== */
+.modal {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+}
+.modal-inner{
+  box-sizing: border-box;
+  width: min(520px, 92vw);
+  max-width: 100%;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  overflow: hidden;
+}
+.modal-header {
+  height: 8px; border-radius: 8px 8px 0 0;
+  background-image: url("https://s3-ap-northeast-1.amazonaws.com/progate/shared/images/lesson/react/modal_bar.svg");
+  background-repeat: no-repeat; background-size: cover;
+}
+
+/* 支払いフォーム */
+.pay-form label { display: block; margin: 12px 0; font-weight: 700; }
+.pay-form input, .pay-form button, .pay-form select, .pay-form textarea {
+  box-sizing: border-box; width: 100%;
+  font-size: 40px; padding: 10px 12px; border: 1px solid #969da1; border-radius: 8px;
+}
+.pay-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.pay-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 12px; }
+.pay-actions button { padding: 10px 16px; border-radius: 8px; border: 0; }
+
+/* 小さい画面での2→1カラム切替 */
+@media (max-width: 420px){
+  .pay-row{ grid-template-columns: 1fr; }
+}
+
+/* ========== Cart page ========== */
+.main.cart-container{
+  width: min(1400px, 98vw);
+  padding: 56px 24px 96px;
+  margin: 0 auto;
+}
+.cart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 16px 0 28px;
+}
+.cart-header h2{
+  margin: 0;
+  font-size: 72px;
+  font-weight: 900;
+  color: #108a6b;
+}
+
+.cart-table{
+  width: 100%;
+  border-collapse: separate; border-spacing: 0;
+  background: #fff;
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 12px 34px rgba(0,0,0,.10);
+  font-size: 26px;
+  line-height: 1.7;
+}
+.cart-table thead th{
+  background: #f1f7fb; color: #1a2d3b;
+  font-size: 28px; font-weight: 800; letter-spacing: .02em;
+  padding: 24px 28px; text-align: left; border-bottom: 2px solid #e7eef5;
+}
+.cart-table tbody td{ padding: 22px 28px; border-bottom: 1px solid #eef3f7; }
+.cart-table tfoot th{
+  font-size: 28px; padding: 24px 28px; background: #fbfcfd; border-top: 2px solid #e7eef5; text-align: right;
+}
+
+.cart-actions .btn-sub,
+.cart-actions .btn-del{
+  font-size: 35px;
+  padding: 10px 16px;
+  border: 0; border-radius: 10px; font-weight: 700; cursor: pointer;
+}
+.cart-actions .btn-sub { background: #edf5ff; color: #1351d8; }
+.cart-actions .btn-del { background: #ffe9ea; color: #c1272d; }
+
+.cart-actions-bottom { display: flex; justify-content: flex-end; margin-top: 18px; }
+.btn-buy {
+  padding: 10px 20px;
+  border: 0; border-radius: 10px;
+  background: #0a8f5b; color: #fff;
+  font-size: 50px; font-weight: 600;
+  box-shadow: 0 10px 24px rgba(10,143,91,.28);
+  cursor: pointer;
+}
+
+/* 購入完了表示 */
+.purchase-complete h3 { font-size: 56px; margin: 0 0 12px; }
+.purchase-complete p  { font-size: 28px; margin: 0 0 24px; }
+
+/* Responsive (Cart) */
+@media (max-width: 900px){
+  .cart-header h2{ font-size: 48px; }
+  .cart-table{ font-size: 22px; }
+  .cart-table thead th{ font-size: 24px; }
+  .cart-actions-bottom .btn-buy{ width: 100%; }
+}
+
+/* ========== Footer ========== */
+.footer { padding: 90px 0; height: 150px; }
+.footer-inner { padding-left: 50px; max-width: 1040px; }
+.footer-logo img { height: 20px; }
+.footer-logo p { color: #2e8585; font-size: 20px; }
+.footer-logo h2 { font-size: 50px; color: #11df86; margin-bottom: 8px; }
+.footer-inner ul { float: right; }
+.footer-inner li { color: #17cc6e; display: inline-block; padding-left: 16px; }
+
+/* 注文サマリー（カート下の小計・送料・合計） */
+.order-summary{
+  width: 100%;
+  max-width: 800px;
+  margin: 16px 0 0 auto;      /* 右寄せ表示 */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  padding: 16px 20px;
+}
+.order-summary .row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 20px;
+}
+.order-summary .row.total{
+  font-weight: 800;
+  font-size: 40px;
+  border-top: 1px solid #eef3f7;
+  margin-top: 8px;
+  padding-top: 12px;
+}
+
+/* モーダル内のフィールドセットの見た目 */
+.ship-fieldset, .card-fieldset{
+  border: 1px solid #dfe7f1;
+  font-size: 30px;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.ship-fieldset legend, .card-fieldset legend{
+  padding: 0 6px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #2c4a63;
+}
+
+/* 合計表示 */
+.pay-total{
+  margin: 10px 0 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+.pay-total .grand{ font-size: 18px; color: #0a8f5b; margin-top: 4px; }
+
+/* 住所のテキストエリアも100%で */
+.pay-form textarea{
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 30px;
+  padding: 10px 12px;
+  border: 1px solid #eaeef1;
+  border-radius: 8px;
+}
+
+/* ===== 決済モーダルを大きく・見やすくする上書き ===== */
+
+/* 画面端に余白を確保（小さい端末で潰れないように） */
+.modal { padding: 20px; }
+
+/* 白い枠（モーダル本体）を拡大 */
+.modal-inner{
+  box-sizing: border-box;
+  width: min(720px, 96vw);       /* 520px → 720px に拡大（画面幅が小さい時は 96vw） */
+  max-height: 92vh;              /* 縦は画面内に収める */
+  overflow: auto;                /* 縦スクロール可 */
+  padding: 28px 28px 24px;       /* 余白もやや広めに */
+  border-radius: 16px;
+}
+
+/* 見出しを少し大きく */
+.modal-inner h3{
+  font-size: 44px;               /* 少し拡大 */
+  margin: 0 0 14px;
+  text-align: center;
+  border-bottom: 3px solid #e6eef7;
+  padding-bottom: 8px;
+}
+
+/* フィールドセット内の余白を広めに */
+.ship-fieldset, .card-fieldset{
+  padding: 16px;
+  border-radius: 12px;
+}
+
+/* ラベルと入力を大きめに */
+.pay-form label{ font-size: 15px; }
+.pay-form input,
+.pay-form textarea{
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 30px;               /* 16 → 18px */
+  padding: 14px 14px;            /* 入力の高さを出す */
+  border: 1px solid #eeeff1;
+  border-radius: 10px;
+}
+
+/* MM/YY と CVC の行 */
+.pay-row{
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  gap: 16px;                     /* すこし広げる */
+}
+
+/* 合計表示も少し大きく */
+.pay-total{ margin-top: 14px; font-weight: 700; }
+.pay-total .grand{ font-size: 40px; color:#0a8f5b; }
+
+/* ボタンを拡大 */
+.pay-actions{ display:flex; justify-content:flex-end; gap: 12px; margin-top: 14px; }
+.pay-actions button{ font-size: 30px; padding: 12px 18px; border-radius: 12px; }
+
+
+@media (max-width: 420px){
+  .modal-inner{ width: 96vw; padding: 22px 18px; }
+  .modal-inner h3{ font-size: 36px; }
+  .pay-row{ grid-template-columns: 1fr; } 
+}
+
+
+.pay-form label{
+  display: block;
+  margin: 12px 0 8px;
+  font-size: 30px;      
+  font-weight: 800;
+  color: #22324a;       
+  letter-spacing: .02em;
+}
+
+.ship-legend,
+.card-legend{
+  font-size: 30px;    
+  font-weight: 900;
+}
+
+.pay-form input,
+.pay-form textarea{
+  font-size: 30px;
+}
+
